@@ -8,7 +8,7 @@ export const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`
 const App = () => {
     const [posts, setPosts] = useState([]);
     const [postId, setPostId] = useState(null);
-    console.log(posts);
+
     useEffect(() => {
         const fetchAllPosts = async () => {
             const response = await fetch(`${APIURL}/posts`);
@@ -17,6 +17,22 @@ const App = () => {
         };
         fetchAllPosts();
     }, []);
+
+    const handleDelete = async (postIdToDelete) => {
+        const response = await fetch(`${APIURL}/posts/${postIdToDelete}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const result = await response.json();
+        if (result) {
+            const newPosts = posts.filter(
+                (post) => post._id !== postIdToDelete
+            );
+            setPosts(newPosts);
+        }
+    };
     return (
         <>
             <div>
@@ -45,6 +61,11 @@ const App = () => {
                     <div>{post.willDeliver}</div>
                     <button type="button" onClick={() => setPostId(post._id)}>
                         Edit
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => handleDelete(post._id)}>
+                        Delete
                     </button>
                 </div>
             ))}
