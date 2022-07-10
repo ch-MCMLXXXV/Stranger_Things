@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { APIURL } from '../index';
 
 const Update = ({ posts, setPosts, postId, setPostId }) => {
-    const [title, setTitle] = useState([]);
-    const [description, setDescription] = useState([]);
-    const [price, setPrice] = useState([]);
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [price, setPrice] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch(`${APIURL}/posts`, {
+        const response = await fetch(`${APIURL}/posts/${postId}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
