@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { APIURL } from '../index';
 
-const Register = ({ setToken }) => {
+export const Register = ({ setToken }) => {
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('');
    const [confirmPassword, setConfirmPassword] = useState('');
