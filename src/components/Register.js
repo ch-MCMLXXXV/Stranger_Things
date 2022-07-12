@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { APIURL } from '../index';
 
-export const Register = ({ setToken }) => {
+export default function Register() {
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('');
    const [confirmPassword, setConfirmPassword] = useState('');
@@ -21,7 +21,7 @@ export const Register = ({ setToken }) => {
          }),
       });
       const result = await response.json();
-      setToken(result);
+      return result;
    };
 
    const onConfirmPassword = () => {
@@ -59,6 +59,4 @@ export const Register = ({ setToken }) => {
          </form>
       </>
    );
-};
-
-export default Register;
+}

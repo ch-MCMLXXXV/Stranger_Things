@@ -1,32 +1,43 @@
-/* import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useEffect, useState } from 'react';
+import { APIURL } from './index';
+import { Link, Outlet } from 'react-router-dom';
 
-const cohortName = '2204-FTB-ET-WEB-PT';
-const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
+export default function App() {
+   const [posts, setPosts] = useState([]);
 
-const App = () => {
-    const [posts, setPosts] = useState([]);
-    console.log(posts);
-    useEffect(() => {
-        const fetchAllPosts = async () => {
-            const response = await fetch(`${APIURL}/posts`);
-            const data = await response.json();
-            setPosts(data);
-            console.log(data);
-        };
-        fetchAllPosts();
-    }, []);
-    return (
-        <>
+   useEffect(() => {
+      const fetchAllPosts = async () => {
+         const response = await fetch(`${APIURL}/posts`);
+         const result = await response.json();
+         setPosts(result.data.posts);
+      };
+      fetchAllPosts();
+   }, []);
+
+   return (
+      <>
+         <div>
+            <header>
+               <h1 className=''>Stranger's Things</h1>
+            </header>
+         </div>
+         <div>
             <h1>Posts</h1>
-            {posts.map((post) => (
-                <div key={post._id}>
-                    <h3>{post.title}</h3>
-                    <div>{post.description}</div>
-                </div>
-            ))}
-        </>
-    );
-};
-
-ReactDOM.render(<App />, document.getElementById('app')); */
+            <nav>
+               <Link to='/components/Register'>Register</Link> | {''}
+               <Link to='/components/Login'>Login</Link>
+            </nav>
+            <Outlet />
+         </div>
+         {posts.map((post) => (
+            <div key={post._id}>
+               <h3>{post.title}</h3>
+               <div>{post.description}</div>
+               <div>{post.location}</div>
+               <div>{post.price}</div>
+               <div>{post.willDeliver}</div>
+            </div>
+         ))}
+      </>
+   );
+}
