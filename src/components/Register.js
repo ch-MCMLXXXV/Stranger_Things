@@ -5,9 +5,9 @@ export default function Register() {
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('');
    const [confirmPassword, setConfirmPassword] = useState('');
+   const [token, setToken] = useState('');
 
-   const handleSubmit = async (e) => {
-      e.preventDefault();
+   const handleRegister = async (username, password) => {
       const response = await fetch(`${APIURL}/users/register`, {
          method: 'POST',
          headers: {
@@ -15,16 +15,29 @@ export default function Register() {
          },
          body: JSON.stringify({
             user: {
-               username: '',
-               password: '',
+               username: username,
+               password: password,
             },
          }),
       });
       const result = await response.json();
+      console.log(result);
       return result;
    };
 
-   const onConfirmPassword = () => {
+   const handleSubmit = async (e) => {
+      e.preventDefault();
+      console.log(username);
+      const result = await handleRegister(username, password);
+      console.log('result', result);
+      const token = result.data.token;
+      console.log('token', token);
+      console.log('setToken', setToken);
+      localStorage.setItem('token', JSON.stringify(token));
+      setToken(token);
+   };
+
+   const onSubmit = () => {
       if (password === true && confirmPassword === true) {
          if (password !== confirmPassword) {
             console.log('The passwords do not match');
@@ -38,7 +51,7 @@ export default function Register() {
    return (
       <>
          <h2>Create an Account</h2>
-         <form onsubmit={handleSubmit}>
+         <form onSubmit={handleSubmit}>
             <input
                type='text'
                placeholder='Enter username'
@@ -54,7 +67,7 @@ export default function Register() {
                placeholder='Confirm password'
                value={confirmPassword}
                onChange={(e) => setConfirmPassword(e.target.value)}
-               onBlur={onConfirmPassword}></input>
+               onBlur={onSubmit}></input>
             <button type='submit'>Register</button>
          </form>
       </>

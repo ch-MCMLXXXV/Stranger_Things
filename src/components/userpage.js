@@ -2,14 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { APIURL } from './index';
 import { Create, Update } from './components';
 
-const UserPage = () => {
+const UserPage = ({ token }) => {
    const [userposts, setUserPosts] = useState([]);
    const [posts, setPosts] = useState([]);
    const [postId, setPostId] = useState(null);
 
    useEffect(() => {
       const fetchUserPosts = async () => {
-         const response = await fetch(`${APIURL}/users/me`);
+         const response = await fetch(`${APIURL}/users/me`, {
+            headers: {
+               'Content-Type': 'application/json',
+               Authorization: `Bearer ${token}`,
+            },
+         });
          const result = await response.json();
          setUserPosts(result.data.posts);
       };
