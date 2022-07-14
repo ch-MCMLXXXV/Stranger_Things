@@ -55,7 +55,13 @@ const Landing = () => {
             columns={{ xs: 4, sm: 8, md: 12 }}>
             {posts.map((post) => (
                <Grid item xs={12} md={6} sm={4}>
-                  <Card varian='outlined' sx={{ display: 'flex' }}>
+                  <Card
+                     variant='outlined'
+                     sx={{
+                        display: 'flex',
+                        backgroundColor: 'aliceblue',
+                        boxShadow: '5px 5px grey',
+                     }}>
                      <CardContent sx={{ flex: 1 }} key={post._id}>
                         <Typography component='h2' variant='h5'>
                            {' '}
