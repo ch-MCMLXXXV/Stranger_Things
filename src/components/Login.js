@@ -1,4 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import { Container } from '@mui/system';
+import { CssBaseline, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { APIURL } from '../index';
 
@@ -37,24 +43,46 @@ function Login({ setToken }) {
    };
 
    return (
-      <>
-         <div>
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-               <input
-                  type='text'
-                  placeholder='Enter username'
+      <Container component='main' maxWidth='xs'>
+         <CssBaseline />
+         <Box
+            sx={{
+               marginTop: 8,
+               display: 'flex',
+               flexDirection: 'column',
+               alignItems: 'center',
+            }}>
+            <Typography component='h1' variant='h4'>
+               Login
+            </Typography>
+            <Box component='form' onSubmit={handleSubmit}>
+               <TextField
+                  margin='normal'
+                  required
+                  fullWidth
+                  id='outlined'
+                  label='Enter Username'
                   value={username}
-                  onChange={(e) => setUsername(e.target.value)}></input>
-               <input
+                  onChange={(e) => setUsername(e.target.value)}></TextField>
+               <TextField
+                  margin='normal'
+                  required
+                  fullWidth
+                  id='outlined-required'
+                  label='Password'
                   type='password'
-                  placeholder='Enter password'
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}></input>
-               <button type='submit'>Login</button>
-            </form>
-         </div>
-      </>
+                  onChange={(e) => setPassword(e.target.value)}></TextField>
+               <Button
+                  type='submit'
+                  fullWidth
+                  variant='contained'
+                  sx={{ mt: 3, mb: 2 }}>
+                  Login
+               </Button>
+            </Box>
+         </Box>
+      </Container>
    );
 }
 

@@ -1,5 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 import { APIURL } from '../index';
+import TextField from '@mui/material/TextField';
+import { Container } from '@mui/system';
+import { CssBaseline, Typography } from '@mui/material';
 
 export default function Register() {
    const [username, setUsername] = useState('');
@@ -49,27 +55,55 @@ export default function Register() {
    };
 
    return (
-      <>
-         <h2>Create an Account</h2>
-         <form onSubmit={handleSubmit}>
-            <input
-               type='text'
-               placeholder='Enter username'
-               value={username}
-               onChange={(e) => setUsername(e.target.value)}></input>
-            <input
-               type='password'
-               placeholder='Enter password'
-               value={password}
-               onChange={(e) => setPassword(e.target.value)}></input>
-            <input
-               type='password'
-               placeholder='Confirm password'
-               value={confirmPassword}
-               onChange={(e) => setConfirmPassword(e.target.value)}
-               onBlur={onSubmit}></input>
-            <button type='submit'>Register</button>
-         </form>
-      </>
+      <Container component='main' maxWidth='xs'>
+         <CssBaseline />
+         <Box
+            sx={{
+               marginTop: 8,
+               display: 'flex',
+               flexDirection: 'column',
+               alignItems: 'center',
+            }}>
+            <Typography component='h1' variant='h4'>
+               Create Account
+            </Typography>
+            <Box component='form' onSubmit={handleSubmit}>
+               <TextField
+                  margin='normal'
+                  required
+                  fullWidth
+                  id='outlined-required'
+                  label='Enter Username'
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}></TextField>
+               <TextField
+                  margin='normal'
+                  required
+                  fullWidth
+                  id='outlined-required'
+                  label='Password'
+                  type='password'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}></TextField>
+               <TextField
+                  margin='normal'
+                  required
+                  fullWidth
+                  id='outlined-required'
+                  label='Confirm Password'
+                  type='password'
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  onBlur={onSubmit}></TextField>
+               <Button
+                  type='submit'
+                  fullWidth
+                  variant='contained'
+                  sx={{ mt: 3, mb: 2 }}>
+                  Register
+               </Button>
+            </Box>
+         </Box>
+      </Container>
    );
 }
