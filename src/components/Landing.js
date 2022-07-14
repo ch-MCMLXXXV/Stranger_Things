@@ -1,5 +1,12 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import Stack from '@mui/material/Stack';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Grid from '@mui/material/Grid';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -28,25 +35,49 @@ const Landing = () => {
          </div>
          <div>
             <h1>Posts</h1>
-            <nav>
-               <Button href='/Register' variant='contained'>
-                  Register
-               </Button>
+
+            <Stack
+               direction='row'
+               divider={<Divider orientation='vertical' flexItem />}
+               spacing={2}>
                <Button href='/Login' variant='contained'>
                   Login
                </Button>
-            </nav>
+               <Button href='/Register' variant='contained'>
+                  Register
+               </Button>
+            </Stack>
             <Outlet />
          </div>
-         {posts.map((post) => (
-            <div key={post._id}>
-               <h3>{post.title}</h3>
-               <div>{post.description}</div>
-               <div>{post.location}</div>
-               <div>{post.price}</div>
-               <div>{post.willDeliver}</div>
-            </div>
-         ))}
+         <Grid
+            container
+            spacing={{ xs: 2, md: 3 }}
+            columns={{ xs: 4, sm: 8, md: 12 }}>
+            {posts.map((post) => (
+               <Grid item xs={12} md={6} sm={4}>
+                  <Card varian='outlined' sx={{ display: 'flex' }}>
+                     <CardContent sx={{ flex: 1 }} key={post._id}>
+                        <Typography component='h2' variant='h5'>
+                           {' '}
+                           {post.title}
+                        </Typography>
+                        <Typography variant='subtitle1'>
+                           {post.description}
+                        </Typography>
+                        <Typography variant='subtitle2'>
+                           {post.location}
+                        </Typography>
+                        <Typography variant='subtitle2'>
+                           {post.price}
+                        </Typography>
+                        <Typography variant='subtitle2'>
+                           {post.willDeliver}
+                        </Typography>
+                     </CardContent>
+                  </Card>
+               </Grid>
+            ))}
+         </Grid>
       </>
    );
 };
