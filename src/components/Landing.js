@@ -1,4 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Button from '@mui/material/Button';
 import { APIURL } from '../index';
 import { Link, Outlet } from 'react-router-dom';
 
@@ -24,8 +29,12 @@ const Landing = () => {
          <div>
             <h1>Posts</h1>
             <nav>
-               <Link to='/Register'>Register</Link> | {''}
-               <Link to='/Login'>Login</Link>
+               <Button href='/Register' variant='contained'>
+                  Register
+               </Button>
+               <Button href='/Login' variant='contained'>
+                  Login
+               </Button>
             </nav>
             <Outlet />
          </div>
