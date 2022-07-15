@@ -28,15 +28,25 @@ const Landing = () => {
 
    return (
       <>
+         <Box sx={{ flexGrow: 1 }}>
+            <AppBar position='static'>
+               <Toolbar>
+                  <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
+                     Stranger's Things
+                  </Typography>
+                  <Button href='/Login' color='inherit'>
+                     Login
+                  </Button>
+                  <Button href='/Register' color='inherit'>
+                     Register
+                  </Button>
+               </Toolbar>
+            </AppBar>
+         </Box>
          <div>
-            <header>
-               <h1 className=''>Stranger's Things</h1>
-            </header>
-         </div>
-         <div>
-            <h1>Posts</h1>
+            <h1>Board</h1>
 
-            <Stack
+            {/* <Stack
                direction='row'
                divider={<Divider orientation='vertical' flexItem />}
                spacing={2}>
@@ -46,7 +56,7 @@ const Landing = () => {
                <Button href='/Register' variant='contained'>
                   Register
                </Button>
-            </Stack>
+            </Stack> */}
             <Outlet />
          </div>
          <Grid

@@ -31,13 +31,14 @@ async function userLogin(username, password) {
 }
 
 function Login({ setToken }) {
-   const history = useNavigate;
+   const history = useNavigate();
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('');
    const handleSubmit = async (e) => {
       e.preventDefault();
       const token = await userLogin(username, password);
-      sessionStorage.setItem('token', JSON.stringify(token));
+      console.log(token);
+      sessionStorage.setItem('token', token);
       setToken(token);
       history('/Homepage');
    };
