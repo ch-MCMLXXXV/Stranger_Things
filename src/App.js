@@ -1,43 +1,42 @@
-// import React, { useEffect, useState } from 'react';
-// import { APIURL } from './index';
-// import { Link, Outlet } from 'react-router-dom';
+import * as React from 'react';
+import { useState, useEffect } from 'react';
+import NavBar from './components/Navbar';
+import { Routes, Route, Outlet } from 'react-router-dom';
+import {
+   Login,
+   Register,
+   Userpage,
+   Homepage,
+   Inbox,
+   Update,
+   Create,
+} from './components';
 
-// export default function App() {
-//    const [posts, setPosts] = useState([]);
+const App = () => {
+   const [token, setToken] = useState('');
+   console.log(token);
+   useEffect(() => {
+      const currToken = sessionStorage.getItem('token');
+      setToken(currToken);
+   }, []);
+   return (
+      <>
+         <NavBar token={token} />
 
-//    useEffect(() => {
-//       const fetchAllPosts = async () => {
-//          const response = await fetch(`${APIURL}/posts`);
-//          const result = await response.json();
-//          setPosts(result.data.posts);
-//       };
-//       fetchAllPosts();
-//    }, []);
+         <Routes>
+            <Route exact path='/' element={<Homepage />}></Route>
+            <Route path='homepage' element={<Homepage token={token} />}></Route>
+            <Route path='userpage' element={<Userpage token={token} />}></Route>
+            <Route path='update' element={<Update token={token} />}></Route>
+            <Route path='create' element={<Create token={token} />}></Route>
+            <Route path='inbox' element={<Inbox token={token} />}></Route>
+            <Route
+               path='Login'
+               element={<Login token={token} setToken={setToken} />}></Route>
+            <Route path='register' element={<Register />}></Route>
+         </Routes>
+      </>
+   );
+};
 
-//    return (
-//       <>
-//          <div>
-//             <header>
-//                <h1 className=''>Stranger's Things</h1>
-//             </header>
-//          </div>
-//          <div>
-//             <h1>Posts</h1>
-//             <nav>
-//                <Link to='/Register'>Register</Link> | {''}
-//                <Link to='/Login'>Login</Link>
-//             </nav>
-//             <Outlet />
-//          </div>
-//          {posts.map((post) => (
-//             <div key={post._id}>
-//                <h3>{post.title}</h3>
-//                <div>{post.description}</div>
-//                <div>{post.location}</div>
-//                <div>{post.price}</div>
-//                <div>{post.willDeliver}</div>
-//             </div>
-//          ))}
-//       </>
-//    );
-// }
+export default App;

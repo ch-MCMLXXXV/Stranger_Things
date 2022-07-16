@@ -5,3 +5,4 @@ export { default as Login } from './Login';
 export { default as Landing } from './Landing';
 export { default as Homepage } from './Homepage';
 export { default as Userpage } from './Userpage';
+export { default as Inbox } from './Inbox';

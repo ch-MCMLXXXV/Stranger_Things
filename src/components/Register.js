@@ -6,6 +6,7 @@ import { APIURL } from '../index';
 import TextField from '@mui/material/TextField';
 import { Container } from '@mui/system';
 import { CssBaseline, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
    const [username, setUsername] = useState('');
@@ -31,7 +32,8 @@ export default function Register() {
       return result;
    };
 
-   const handleSubmit = async (e) => {
+   const HandleSubmit = async (e) => {
+      const history = useNavigate();
       e.preventDefault();
       console.log(username);
       const result = await handleRegister(username, password);
@@ -39,8 +41,9 @@ export default function Register() {
       const token = result.data.token;
       console.log('token', token);
       console.log('setToken', setToken);
-      localStorage.setItem('token', JSON.stringify(token));
+      localStorage.setItem('token', token);
       setToken(token);
+      history('/Homepage');
    };
 
    const onSubmit = () => {
@@ -67,7 +70,7 @@ export default function Register() {
             <Typography component='h1' variant='h4'>
                Create Account
             </Typography>
-            <Box component='form' onSubmit={handleSubmit}>
+            <Box component='form' onSubmit={HandleSubmit}>
                <TextField
                   margin='normal'
                   required

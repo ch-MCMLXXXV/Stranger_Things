@@ -1,3 +1,8 @@
+import EditIcon from '@mui/icons-material/Edit';
+import Button from '@mui/material/Button';
+import { Container } from '@mui/system';
+import { TextField, Typography, CssBaseline } from '@mui/material';
+import Box from '@mui/material/Box';
 import React, { useState } from 'react';
 import { APIURL } from '../index';
 
@@ -39,27 +44,53 @@ const Update = ({ posts, setPosts, postId, setPostId, token }) => {
       }
    };
    return (
-      <>
-         <h3>Create a Post</h3>
-         <form onsubmit={handleSubmit}>
-            <input
-               type='text'
-               placeholder='title'
-               value={title}
-               onChange={(e) => setTitle(e.target.value)}></input>
-            <input
-               type='text'
-               placeholder='description'
-               value={description}
-               onChange={(e) => setDescription(e.target.value)}></input>
-            <input
-               type='currency'
-               placeholder='price'
-               value={price}
-               onChange={(e) => setPrice(e.target.value)}></input>
-            <button type='submit'>Submit</button>
-         </form>
-      </>
+      <Container component='main' maxWidth='xs'>
+         <CssBaseline />
+         <Box
+            sx={{
+               marginTop: 8,
+               display: 'flex',
+               flexDirection: 'column',
+               alignItems: 'center',
+            }}>
+            <Typography component='h1' variant='h4'>
+               Update Post
+            </Typography>
+            <Box component='form' onSubmit={handleSubmit}>
+               <TextField
+                  margin='normal'
+                  fullWidth
+                  id='outlined'
+                  label='Title'
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}></TextField>
+               <TextField
+                  margin='normal'
+                  fullWidth
+                  id='outlined'
+                  label='Description'
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}></TextField>
+               <TextField
+                  margin='normal'
+                  fullWidth
+                  id='outlined'
+                  label='Price'
+                  type='currency'
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}></TextField>
+               <Button
+                  type='submit'
+                  margin='normal'
+                  aria-label='edit'
+                  variant='outlined'
+                  startIcon={<EditIcon />}
+                  onClick={() => setPostId}>
+                  Edit
+               </Button>
+            </Box>
+         </Box>
+      </Container>
    );
 };
 

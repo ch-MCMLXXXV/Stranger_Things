@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { APIURL } from '../index';
 import Create from './Create.js';
 import Update from './Update.js';
-import { Typography } from '@mui/material';
+import { IconButton, Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -54,23 +54,9 @@ const Userpage = ({ token }) => {
 
    return (
       <>
-         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position='static'>
-               <Toolbar>
-                  <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-                     Stranger's Things
-                  </Typography>
-                  <Button href='' color='inherit'>
-                     My Posts
-                  </Button>
-               </Toolbar>
-            </AppBar>
-         </Box>
-         <Typography variant='h1' component='div'>
-            My Posts
-         </Typography>
-         {postId ? (
+         {/* {postId ? (
             <Update
+               token={token}
                posts={posts}
                setPosts={setPosts}
                postId={postId}
@@ -78,7 +64,7 @@ const Userpage = ({ token }) => {
             />
          ) : (
             <Create posts={posts} setPosts={setPosts} token={token} />
-         )}
+         )} */}
 
          <Grid
             container
@@ -112,8 +98,12 @@ const Userpage = ({ token }) => {
                         </Typography>
                      </CardContent>
                      <CardActions>
-                        <DeleteIcon />
-                        <EditIcon />
+                        <IconButton aria-label='edit' href='/Create'>
+                           <EditIcon />
+                        </IconButton>
+                        <IconButton aria-label='delete' onClick={handleDelete}>
+                           <DeleteIcon />
+                        </IconButton>
                      </CardActions>
                   </Card>
                </Grid>

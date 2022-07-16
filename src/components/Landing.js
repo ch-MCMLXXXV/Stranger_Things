@@ -28,37 +28,6 @@ const Landing = () => {
 
    return (
       <>
-         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position='static'>
-               <Toolbar>
-                  <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-                     Stranger's Things
-                  </Typography>
-                  <Button href='/Login' color='inherit'>
-                     Login
-                  </Button>
-                  <Button href='/Register' color='inherit'>
-                     Register
-                  </Button>
-               </Toolbar>
-            </AppBar>
-         </Box>
-         <div>
-            <h1>Board</h1>
-
-            {/* <Stack
-               direction='row'
-               divider={<Divider orientation='vertical' flexItem />}
-               spacing={2}>
-               <Button href='/Login' variant='contained'>
-                  Login
-               </Button>
-               <Button href='/Register' variant='contained'>
-                  Register
-               </Button>
-            </Stack> */}
-            <Outlet />
-         </div>
          <Grid
             container
             spacing={{ xs: 2, md: 3 }}
