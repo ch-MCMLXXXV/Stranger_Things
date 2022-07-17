@@ -5,11 +5,13 @@ import { TextField, Typography, CssBaseline } from '@mui/material';
 import Box from '@mui/material/Box';
 import React, { useState } from 'react';
 import { APIURL } from '../index';
+import { useNavigate } from 'react-router-dom';
 
 const Update = ({ posts, setPosts, postId, setPostId, token }) => {
    const [title, setTitle] = useState('');
    const [description, setDescription] = useState('');
    const [price, setPrice] = useState('');
+   const history = useNavigate();
 
    const handleSubmit = async (e) => {
       e.preventDefault();
@@ -41,6 +43,7 @@ const Update = ({ posts, setPosts, postId, setPostId, token }) => {
          setDescription('');
          setPrice('');
          setPostId(null);
+         history('/Userpage');
       }
    };
    return (

@@ -4,7 +4,8 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
-import { Alert } from '@mui/material';
+import Search from './Search';
+import Userpage from './Userpage';
 
 const NavBar = ({ token }) => {
    return (
@@ -26,6 +27,7 @@ const NavBar = ({ token }) => {
                      </>
                   ) : (
                      <>
+                        <Search />
                         <Button href='/Homepage' color='inherit'>
                            Home
                         </Button>

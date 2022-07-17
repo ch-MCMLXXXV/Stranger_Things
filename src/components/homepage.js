@@ -45,9 +45,8 @@ const Homepage = ({ token }) => {
                         backgroundColor: 'aliceblue',
                         boxShadow: '5px 5px grey',
                      }}>
-                     <CardContent sx={{ flex: 1 }}>
+                     <CardContent sx={{ flex: 1 }} key={post._id}>
                         <Typography component='h2' variant='h5'>
-                           {' '}
                            {post.title}
                         </Typography>
                         <Typography variant='subtitle1'>

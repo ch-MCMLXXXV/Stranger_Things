@@ -13,27 +13,31 @@ export default function Register() {
    const [password, setPassword] = useState('');
    const [confirmPassword, setConfirmPassword] = useState('');
    const [token, setToken] = useState('');
+   const history = useNavigate();
 
    const handleRegister = async (username, password) => {
-      const response = await fetch(`${APIURL}/users/register`, {
-         method: 'POST',
-         headers: {
-            'Content-Type': 'application/json',
-         },
-         body: JSON.stringify({
-            user: {
-               username: username,
-               password: password,
+      try {
+         const response = await fetch(`${APIURL}/users/register`, {
+            method: 'POST',
+            headers: {
+               'Content-Type': 'application/json',
             },
-         }),
-      });
-      const result = await response.json();
-      console.log(result);
-      return result;
+            body: JSON.stringify({
+               user: {
+                  username: username,
+                  password: password,
+               },
+            }),
+         });
+         const result = await response.json();
+         console.log(result);
+         return result;
+      } catch (error) {
+         console.log(error);
+      }
    };
 
    const HandleSubmit = async (e) => {
-      const history = useNavigate();
       e.preventDefault();
       console.log(username);
       const result = await handleRegister(username, password);
@@ -41,7 +45,7 @@ export default function Register() {
       const token = result.data.token;
       console.log('token', token);
       console.log('setToken', setToken);
-      localStorage.setItem('token', token);
+      sessionStorage.setItem('token', token);
       setToken(token);
       history('/Homepage');
    };

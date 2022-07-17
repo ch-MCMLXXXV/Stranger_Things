@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { APIURL } from '../index';
 
 const Create = ({ posts, setPosts, token }) => {
+   const history = useNavigate;
    const [title, setTitle] = useState([]);
    const [description, setDescription] = useState([]);
    const [price, setPrice] = useState('');
@@ -26,6 +28,7 @@ const Create = ({ posts, setPosts, token }) => {
       const result = await response.json();
       console.log(result);
       setPosts([result, ...posts]);
+      history('/Userpage');
    };
 
    return (

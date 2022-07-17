@@ -98,10 +98,16 @@ const Userpage = ({ token }) => {
                         </Typography>
                      </CardContent>
                      <CardActions>
-                        <IconButton aria-label='edit' href='/Create'>
+                        <IconButton
+                           aria-label='edit'
+                           size='small'
+                           href='/Create'>
                            <EditIcon />
                         </IconButton>
-                        <IconButton aria-label='delete' onClick={handleDelete}>
+                        <IconButton
+                           aria-label='delete'
+                           size='small'
+                           onClick={handleDelete}>
                            <DeleteIcon />
                         </IconButton>
                      </CardActions>
