@@ -7,3 +7,5 @@ export { default as Homepage } from './Homepage';
 export { default as Userpage } from './Userpage';
 export { default as Inbox } from './Inbox';
 export { default as Logout } from './Logout';
+export { default as Search } from './Search';
+export { default as Message } from './Message';

@@ -11,9 +11,11 @@ import {
    Update,
    Create,
    Logout,
+   Search,
+   Message,
 } from './components';
 
-const App = ({ posts, setPosts, postId, setPostsID }) => {
+const App = ({ posts, setPosts, postId, setPostsID, setpostShown }) => {
    const [token, setToken] = useState('');
    console.log(token);
    useEffect(() => {
@@ -22,7 +24,7 @@ const App = ({ posts, setPosts, postId, setPostsID }) => {
    }, []);
    return (
       <>
-         <NavBar token={token} />
+         <NavBar token={token} posts={posts} setpostShown={setpostShown} />
 
          <Routes>
             <Route exact path='/' element={<Homepage />}></Route>
@@ -52,6 +54,9 @@ const App = ({ posts, setPosts, postId, setPostsID }) => {
             <Route
                path='logout'
                element={<Logout token={token} setToken={setToken} />}></Route>
+            <Route
+               path='message'
+               element={<Message token={token} postId={postId} />}></Route>
          </Routes>
       </>
    );

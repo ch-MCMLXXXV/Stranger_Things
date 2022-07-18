@@ -1,22 +1,12 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import Inbox from './Inbox';
-import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import Stack from '@mui/material/Stack';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
 import { APIURL } from '../index';
-import { Link, Outlet } from 'react-router-dom';
-import { CardActionArea, CardActions } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { CardActions, IconButton } from '@mui/material';
+import MessageIcon from '@mui/icons-material/Message';
 
 const Homepage = ({ token }) => {
    const [posts, setPosts] = useState([]);
@@ -56,7 +46,16 @@ const Homepage = ({ token }) => {
                            {post.location},{post.price},{post.willDeliver}
                         </Typography>
                      </CardContent>
-                     <CardActions>{token ? <Inbox /> : null}</CardActions>
+                     <CardActions>
+                        {token ? (
+                           <IconButton
+                              aria-label='message'
+                              size='small'
+                              href='/Message'>
+                              <MessageIcon />
+                           </IconButton>
+                        ) : null}
+                     </CardActions>
                   </Card>
                </Grid>
             ))}

@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Search from './Search';
 import Userpage from './Userpage';
 
-const NavBar = ({ token }) => {
+const NavBar = ({ token, posts, setpostShown, username }) => {
    return (
       <>
          <Box sx={{ flexGrow: 1 }}>
@@ -39,6 +39,9 @@ const NavBar = ({ token }) => {
                         </Button>
                         <Button href='/Logout' color='inherit'>
                            Logout
+                        </Button>
+                        <Button href='/Create' color='inherit'>
+                           Create Post
                         </Button>
                      </>
                   )}

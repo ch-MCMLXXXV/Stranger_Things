@@ -1,13 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { APIURL } from '../index';
-import Create from './Create.js';
-import Update from './Update.js';
 import { IconButton, Typography } from '@mui/material';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
@@ -15,10 +9,10 @@ import { CardActions } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const Userpage = ({ token }) => {
+const Userpage = ({ token, username, postId, setPostId }) => {
    const [posts, setPosts] = useState([]);
-   const [postId, setPostId] = useState(null);
    console.log(token);
+
    useEffect(() => {
       const fetchUserPosts = async () => {
          const response = await fetch(`${APIURL}/users/me`, {
@@ -28,6 +22,7 @@ const Userpage = ({ token }) => {
             },
          });
          const result = await response.json();
+         console.log(result);
          if (result) {
             const activePost = result.data.posts.filter(
                (post) => post.active === true
@@ -38,34 +33,24 @@ const Userpage = ({ token }) => {
       fetchUserPosts();
    }, [token]);
 
-   const handleDelete = async (postIdToDelete) => {
-      const response = await fetch(`${APIURL}/post/${postIdToDelete}`, {
+   const handleDelete = async (postId) => {
+      const response = await fetch(`${APIURL}/post/${postId}`, {
          method: 'DELETE',
          headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
          },
       });
       const result = await response.json();
+      console.log(result);
       if (result) {
-         const newPosts = posts.filter((post) => post._id !== postIdToDelete);
+         const newPosts = posts.filter((post) => post._id !== postId);
          setPosts(newPosts);
       }
    };
 
    return (
       <>
-         {/* {postId ? (
-            <Update
-               token={token}
-               posts={posts}
-               setPosts={setPosts}
-               postId={postId}
-               setPostId={setPostId}
-            />
-         ) : (
-            <Create posts={posts} setPosts={setPosts} token={token} />
-         )} */}
-
          <Grid
             container
             spacing={{ xs: 2, md: 3 }}
@@ -101,13 +86,13 @@ const Userpage = ({ token }) => {
                         <IconButton
                            aria-label='edit'
                            size='small'
-                           href='/Create'>
+                           href='/Update'>
                            <EditIcon />
                         </IconButton>
                         <IconButton
                            aria-label='delete'
                            size='small'
-                           onClick={handleDelete}>
+                           onClick={() => handleDelete(post._id)}>
                            <DeleteIcon />
                         </IconButton>
                      </CardActions>

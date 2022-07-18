@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { APIURL } from '../index';
+import { TextField, CssBaseline, Typography } from '@mui/material';
+import { Container } from '@mui/system';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 
 const Create = ({ posts, setPosts, token }) => {
    const history = useNavigate;
@@ -33,25 +37,54 @@ const Create = ({ posts, setPosts, token }) => {
 
    return (
       <>
-         <h3>Create a Post</h3>
-         <form onSubmit={handleSubmit}>
-            <input
-               type='text'
-               placeholder='title'
-               value={title}
-               onChange={(e) => setTitle(e.target.value)}></input>
-            <input
-               type='text'
-               placeholder='description'
-               value={description}
-               onChange={(e) => setDescription(e.target.value)}></input>
-            <input
-               type='currency'
-               placeholder='price'
-               value={price}
-               onChange={(e) => setPrice(e.target.value)}></input>
-            <button type='submit'>Submit</button>
-         </form>
+         <Container component='main' maxWidth='xs'>
+            <CssBaseline />
+            <Box
+               sx={{
+                  marginTop: 8,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+               }}>
+               <Typography component='h1' variant='h4'>
+                  Create A Post
+               </Typography>
+               <Box component='form' onSubmit={handleSubmit}>
+                  <TextField
+                     margin='normal'
+                     fullWidth
+                     id='outlined'
+                     label='Title'
+                     value={title}
+                     onChange={(e) => setTitle(e.target.value)}></TextField>
+                  <TextField
+                     margin='normal'
+                     fullWidth
+                     id='outlined'
+                     label='Description'
+                     value={description}
+                     onChange={(e) =>
+                        setDescription(e.target.value)
+                     }></TextField>
+                  <TextField
+                     margin='normal'
+                     fullWidth
+                     id='outlined'
+                     label='Price'
+                     type='currency'
+                     value={price}
+                     onChange={(e) => setPrice(e.target.value)}></TextField>
+                  <Button
+                     type='submit'
+                     margin='normal'
+                     aria-label='Post'
+                     id='outlined'
+                     variant='outlined'>
+                     Post
+                  </Button>
+               </Box>
+            </Box>
+         </Container>
       </>
    );
 };

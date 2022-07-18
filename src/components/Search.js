@@ -1,13 +1,36 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { APIURL } from '../index';
 import SearchIcon from '@mui/icons-material/Search';
-import { InputBase } from '@mui/material';
-import { ThemeContext } from '@emotion/react';
+import { InputBase, IconButton } from '@mui/material';
 import Box from '@mui/material/Box';
 
-const Search = ({ token, posts, setPosts }) => {
+const Search = ({ token, posts, setpostShown }) => {
    const [searchTerm, setSearchTerm] = useState('');
+
+   const handleSubmit = (e) => {
+      e.preventDefault();
+      const filterPost =
+         posts.length && posts.filter((post) => postMatches(post, searchTerm));
+      const postShown = searchTerm.length ? filterPost : posts;
+      setpostShown(postShown);
+   };
+
+   function postMatches(post, text) {
+      if (post.title.includes(searchTerm)) {
+         return true;
+      }
+      if (post.description.includes(searchTerm)) {
+         return true;
+      }
+      if (post.location.includes(searchTerm)) {
+         return true;
+      }
+      if (post.price.includes(searchTerm)) {
+         return true;
+      } else {
+         return false;
+      }
+   }
 
    return (
       <>
@@ -18,11 +41,17 @@ const Search = ({ token, posts, setPosts }) => {
                mr: '2',
                ml: '0',
             }}>
-            <SearchIcon />
             <InputBase
+               onSubmit={handleSubmit}
                variant='outlined'
+               value={searchTerm}
+               onChange={(e) => setSearchTerm(e.target.value)}
                placeholder='Search'
                aria-label='search'></InputBase>
+            <IconButton aria-label='search' onClick={handleSubmit}>
+               {' '}
+               <SearchIcon />{' '}
+            </IconButton>
          </Box>
       </>
    );
